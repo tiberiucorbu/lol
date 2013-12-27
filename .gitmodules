@@ -1,0 +1,6 @@
+[submodule "packages/serialport"]
+	path = packages/serialport
+	url = git@github.com:tiberiucorbu/meteor-serialport.git
+[submodule "packages/meteor-file"]
+	path = packages/meteor-file
+	url = git@github.com:tiberiucorbu/meteor-file.git

@@ -2,10 +2,10 @@ LolCanvas = function(options) {
 	options = _.extend(this, this.defaults, options);
 	this.canvas = options.canvas;
 	this.ctx = this.canvas.getContext('2d');
-	this.bitmap = new Bitmap(options);
+	this.bitmap = new lol.MonoBitmap(options);
 	this.bitmap.randomize();
 	this.attachEvents();
-	this.resize();
+	this.resizeCanvas();
 	if (this.autoStart){
 		this.intervalId = window.requestAnimationFrame(_.bind(this.startAnimLoop, this));
 	}
@@ -23,10 +23,9 @@ LolCanvas.prototype = {
 
 	},
 	attachEvents : function() {
-		window.addEventListener('resize', _.bind(this.resize, this), false);
+		window.addEventListener('resize', _.bind(this.resizeCanvas, this), false);
 	},
-
-	resize : function(event) {
+	resizeCanvas : function(event) {
 		var width = this.canvas.clientWidth;
 		this.canvas.width = width;
 		var size = width / this.bitmap.w;

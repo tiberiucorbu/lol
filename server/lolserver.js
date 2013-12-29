@@ -1,4 +1,4 @@
-var Future = Npm.require('fibers/future');
+//var Future = Npm.require('fibers/future');
 
 Meteor.startup(function() {
 
@@ -8,12 +8,12 @@ Meteor.startup(function() {
 		h : 16
 	};
 	var gol = new GameOfLife({
-		bitmap : new Bitmap(displaySize),
+		bitmap : new lol.MonoBitmap(displaySize),
 		toroidal : false,
 		detectFreez : 10
 	});
 	gol.bitmap.randomize();
-	var text = new TextBitmap(displaySize);
+	var text = new lol.TextBitmap(displaySize);
 	text.write('G');
 	text.write('A');
 	text.write('M');
@@ -22,9 +22,9 @@ Meteor.startup(function() {
 		gol.next();
 		dirty = true;
 	}, 50);
-	
+
 	var lolSerial = new LolSerial(_.extend({
-		stepCallback :function(bitmap){
+		stepCallback : function(bitmap) {
 			bitmap.copy(0, 0, gol.bitmap);
 			bitmap.copy(4, 4, text.bitmap, true);
 		}

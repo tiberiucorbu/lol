@@ -1,6 +1,6 @@
 LolSerial = function(options) {
 	_.extend(this, this.defaults, options || {});
-	this.bitmap = this.bitmap || new Bitmap(options);
+	this.bitmap = this.bitmap || new lol.MonoBitmap(options);
 	this.bitmap.randomize();
 	this.initSerialPort();
 	this.attachOpenHandler();

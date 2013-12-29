@@ -11,5 +11,6 @@ bootstrap
 serialport
 meteor-file
 underscore
-meteor-bitmap
 jquery
+bitmap-lol
+history

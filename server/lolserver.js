@@ -1,21 +1,34 @@
-// This solves the issue
-//var require = __meteor_bootstrap__.require;
 var Future = Npm.require('fibers/future');
-//var SerialPort = SerialPort;
 
 Meteor.startup(function() {
-	var sp = new SerialPort('/dev/ttyACM0', {
-		baudrate : 115200
-	}, true);
 
-	sp.on("open", function() {
-		setInterval(30, function() {
-			for (var x = 0; x < 16; x++) {
-				sp.write(new Buffer('DR ' + x + ' 255 255 255 255 \n'));
-			}
-		});
-
+	var dirty = false;
+	var displaySize = {
+		w : 32,
+		h : 16
+	};
+	var gol = new GameOfLife({
+		bitmap : new Bitmap(displaySize),
+		toroidal : false,
+		detectFreez : 10
 	});
+	gol.bitmap.randomize();
+	var text = new TextBitmap(displaySize);
+	text.write('G');
+	text.write('A');
+	text.write('M');
+	text.write('E');
+	setInterval(function() {
+		gol.next();
+		dirty = true;
+	}, 50);
+	
+	var lolSerial = new LolSerial(_.extend({
+		stepCallback :function(bitmap){
+			bitmap.copy(0, 0, gol.bitmap);
+			bitmap.copy(4, 4, text.bitmap, true);
+		}
+	}, displaySize));
 
 });
 

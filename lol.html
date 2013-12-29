@@ -1,15 +1,54 @@
 <head>
 	<title>lol</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-	{{> form}}
+	<div class="container-fluid">
+		{{> lolEditor}}
+	</div>
 </body>
 
-<template name="hello">
-	<h1>Hello World!</h1>
-	{{greeting}}
-	<input type="button" value="Click" />
+<template name="newButton">
+
+	<div class="btn-group">
+		<a class="btn btn-primary" href="#"><i class="icon-plus icon-white"></i> New</a>
+		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="#"><i class="icon-picture"></i> Simple Bitmap</a>
+			</li>
+			<li>
+				<a href="#"><i class="icon-list"></i> Layered Bitmap</a>
+			</li>
+			<li>
+				<a href="#"><i class="icon-play-circle"></i> Animation</a>
+			</li>
+		</ul>
+	</div>
+</template>
+
+<template name="lolEditor">
+	<div class="row">
+		<div class="span12" id="toolbox">
+			{{> newButton}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span8">
+			{{> lolDisplay}}
+		</div>
+		<div class="span4">
+			opts
+		</div>
+	</div>
+</template>
+<template name="lolDisplay">
+	<div class="row">
+		<div class="span8">
+			<canvas id="lolDisplay" style="width:100%; height: 100%"></canvas>
+		</div>
+	</div>
 </template>
 
 <template name="form">

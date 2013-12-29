@@ -11,3 +11,5 @@ bootstrap
 serialport
 meteor-file
 underscore
+meteor-bitmap
+jquery

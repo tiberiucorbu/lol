@@ -1,10 +1,12 @@
-Template.hello.greeting = function() {
-	return "Welcome to lol.";
+var startup = function() {
+	$(document).ready(ready);
 };
 
-Template.hello.events({
-	'click input' : function() {
-		// template data, if any, is available in 'this'
-		alert('Helloo');
-	}
-}); 
+var ready = function() {
+	var canvas = $('#lolDisplay')[0];
+	var display = new LolCanvas({
+		canvas : canvas,
+	});
+};
+
+Meteor.startup(startup);
